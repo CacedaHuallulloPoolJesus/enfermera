@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Día de la Enfermera — 12 de mayo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════════════════════════════════
+       PERSONALIZACIÓN RÁPIDA (edita estos valores o busca CONFIG abajo en JS)
+       - --nombre-enfermera: se muestra en el hero (también editable en JS)
+       ═══════════════════════════════════════════════════════════════════ */
+    :root {
+      --blanco: #fefefe;
+      --azul-cielo: #7ec8e3;
+      --azul-suave: #b8e0f5;
+      --rosa-suave: #f8c8dc;
+      --rosa-palido: #fdeef4;
+      --dorado: #d4af37;
+      --dorado-claro: #f4e4a6;
+      --verde-medico: #2d8a6e;
+      --verde-claro: #a8e6cf;
+      --texto: #2c3e50;
+      --glass: rgba(255, 255, 255, 0.42);
+      --glass-border: rgba(255, 255, 255, 0.65);
+      --sombra: 0 12px 40px rgba(45, 138, 110, 0.12);
+      --nombre-enfermera: "María"; /* Cambia aquí el nombre decorativo si lo prefieres en CSS */
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Poppins", sans-serif;
+      color: var(--texto);
+      background: linear-gradient(145deg, #e8f8ff 0%, var(--rosa-palido) 45%, #fff9f0 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 1.2s ease;
+    }
+    body.celebration-bg {
+      background: linear-gradient(160deg, #fff5fb 0%, #e0f7fa 35%, #fff8e7 70%, #e8fff4 100%);
+    }
+
+    /* Partículas de fondo */
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.35;
+      animation: floatParticle 18s linear infinite;
+    }
+    @keyframes floatParticle {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.4; }
+      90% { opacity: 0.35; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ═══ Pantalla de apertura (carta) ═══ */
+    #opening-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #dff4ff 0%, var(--rosa-palido) 50%, #fff8e7 100%);
+      transition: opacity 0.8s ease, visibility 0.8s;
+    }
+    #opening-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .letter-envelope {
+      perspective: 1200px;
+      width: min(92vw, 380px);
+      animation: bounceSoft 3s ease-in-out infinite;
+    }
+    @keyframes bounceSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .letter-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,248,252,0.98) 100%);
+      border-radius: 20px;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 25px 60px rgba(126, 200, 227, 0.35), 0 0 0 1px var(--glass-border);
+      backdrop-filter: blur(12px);
+      transform-style: preserve-3d;
+      animation: revealCard 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      transform-origin: center top;
+    }
+    @keyframes revealCard {
+      0% { transform: rotateX(-12deg) scale(0.85); opacity: 0; }
+      100% { transform: rotateX(0) scale(1); opacity: 1; }
+    }
+    .letter-flap {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-left: min(46vw, 190px) solid transparent;
+      border-right: min(46vw, 190px) solid transparent;
+      border-top: 70px solid rgba(184, 224, 245, 0.85);
+      transform: translateX(-50%) translateY(-99%);
+      transform-origin: bottom center;
+      animation: letterOpen 2s ease-in-out infinite alternate;
+      filter: drop-shadow(0 -4px 8px rgba(0,0,0,0.06));
+    }
+    @keyframes letterOpen {
+      0% { transform: translateX(-50%) translateY(-99%) rotateX(0deg); }
+      100% { transform: translateX(-50%) translateY(-99%) rotateX(8deg); }
+    }
+    .opening-heart {
+      font-size: 2.5rem;
+      text-align: center;
+      animation: floatHeart 2.5s ease-in-out infinite, heartbeat 1.2s ease-in-out infinite;
+    }
+    @keyframes floatHeart {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.12); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.08); }
+    }
+    .opening-title {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(2rem, 6vw, 2.75rem);
+      text-align: center;
+      color: var(--verde-medico);
+      margin-top: 0.5rem;
+      text-shadow: 0 2px 20px rgba(212, 175, 55, 0.35);
+      animation: glowText 3s ease-in-out infinite;
+    }
+    @keyframes glowText {
+      0%, 100% { text-shadow: 0 2px 12px rgba(212, 175, 55, 0.25); }
+      50% { text-shadow: 0 0 28px rgba(212, 175, 55, 0.55), 0 4px 20px rgba(126, 200, 227, 0.4); }
+    }
+    .opening-date {
+      text-align: center;
+      font-weight: 600;
+      color: var(--dorado);
+      font-size: 1.15rem;
+      margin: 0.75rem 0 1.25rem;
+      letter-spacing: 0.08em;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.88; transform: scale(1.03); }
+    }
+    .btn-open {
+      display: block;
+      width: 100%;
+      padding: 0.95rem 1.25rem;
+      border: none;
+      border-radius: 999px;
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #fff;
+      background: linear-gradient(120deg, var(--verde-medico), var(--azul-cielo));
+      box-shadow: 0 8px 28px rgba(45, 138, 110, 0.35);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .btn-open::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      transform: translateX(-100%);
+      animation: shimmer 2.5s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      50%, 100% { transform: translateX(100%); }
+    }
+    .btn-open:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(45, 138, 110, 0.45); }
+
+    /* Capas decorativas globales */
+    .layer-hearts, .layer-stars, .layer-flowers, .layer-doves, .layer-confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      overflow: hidden;
+    }
+    .layer-confetti { z-index: 900; }
+
+    .floating-heart {
+      position: absolute;
+      color: var(--rosa-suave);
+      font-size: 1rem;
+      animation: floatHeartUp 12s linear infinite;
+      opacity: 0.85;
+      text-shadow: 0 0 8px rgba(248, 200, 220, 0.8);
+    }
+    @keyframes floatHeartUp {
+      0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
+      8% { opacity: 0.9; }
+      100% { transform: translateY(-15vh) translateX(25px) rotate(25deg); opacity: 0; }
+    }
+
+    .star-sparkle {
+      position: absolute;
+      color: var(--dorado);
+      animation: sparkle 2.2s ease-in-out infinite;
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: 0.4; transform: scale(0.8) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.15) rotate(18deg); }
+    }
+
+    .falling-flower {
+      position: absolute;
+      font-size: 1.1rem;
+      animation: fallingFlowers linear infinite;
+      opacity: 0.9;
+    }
+    @keyframes fallingFlowers {
+      0% { transform: translateY(-10vh) rotate(0deg); }
+      100% { transform: translateY(110vh) rotate(360deg); }
+    }
+
+    .med-cross-float {
+      position: absolute;
+      color: var(--verde-medico);
+      font-weight: 700;
+      font-size: 0.9rem;
+      animation: rotateCross 8s linear infinite;
+      opacity: 0.25;
+    }
+    @keyframes rotateCross {
+      0% { transform: rotate(0deg) translateY(0); }
+      100% { transform: rotate(360deg) translateY(80vh); }
+    }
+
+    .dove {
+      position: absolute;
+      font-size: 1.4rem;
+      animation: doveFly linear infinite;
+      opacity: 0.75;
+    }
+    @keyframes doveFly {
+      0% { transform: translateX(-10vw) translateY(40vh) scale(0.9); }
+      100% { transform: translateX(110vw) translateY(25vh) scale(1); }
+    }
+
+    main {
+      position: relative;
+      z-index: 10;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 4rem;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      animation: fadeInUp 1s ease forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      font-size: 0.8rem;
+      color: var(--verde-medico);
+      margin-bottom: 1rem;
+      animation: slideIn 0.8s ease 0.2s both, typing 4s ease-in-out 1.2s infinite;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .hero h1 {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(2.4rem, 7vw, 3.8rem);
+      color: var(--verde-medico);
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    .hero .nombre-destacado {
+      display: block;
+      background: linear-gradient(90deg, var(--dorado), var(--verde-medico), var(--azul-cielo));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: glowText 4s ease-in-out infinite;
+    }
+    .hero-sub {
+      font-weight: 400;
+      font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+      max-width: 36rem;
+      margin: 0 auto 1.25rem;
+      color: #4a6572;
+      line-height: 1.65;
+    }
+    .typewriter-box {
+      min-height: 4.5rem;
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 1rem 1.25rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--sombra);
+      font-size: clamp(0.88rem, 2.8vw, 1.02rem);
+      line-height: 1.6;
+      position: relative;
+      overflow: hidden;
+    }
+    .typewriter-box::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 55%);
+      animation: angelGlow 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes angelGlow {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+    #typewriter-line { position: relative; z-index: 1; }
+    .cursor-blink::after {
+      content: "|";
+      color: var(--verde-medico);
+      animation: blink 0.8s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* Nombre sugerido en lista de animaciones (micro pulso de texto) */
+    @keyframes typing {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.92; }
+    }
+
+    /* Enfermera + batas (SVG zona) */
+    .nurse-showcase {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .nurse-svg-wrap {
+      flex: 0 0 auto;
+      animation: nurseWave 4s ease-in-out infinite;
+    }
+    @keyframes nurseWave {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-10px) rotate(1deg); }
+    }
+    .coats-row {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .coat-icon {
+      font-size: 2rem;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.08));
+      animation: coatSway 3.5s ease-in-out infinite;
+    }
+    .coat-icon:nth-child(2) { animation-delay: 0.4s; }
+    .coat-icon:nth-child(3) { animation-delay: 0.8s; }
+    @keyframes coatSway {
+      0%, 100% { transform: rotate(-4deg); }
+      50% { transform: rotate(5deg); }
+    }
+
+    /* Intro */
+    .section {
+      margin-top: 2.5rem;
+      padding: 1.75rem;
+      border-radius: 22px;
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--sombra);
+      animation: fadeInUp 0.9s ease both;
+    }
+    .section h2 {
+      font-size: clamp(1.25rem, 4vw, 1.55rem);
+      color: var(--verde-medico);
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section p { line-height: 1.75; color: #455a64; font-size: 0.98rem; }
+
+    /* Tarjetas “por qué eres especial” */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    @media (min-width: 640px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .cards-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .reason-card {
+      padding: 1.25rem 1.15rem;
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.75), rgba(232, 248, 255, 0.65));
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 0 8px 24px rgba(126, 200, 227, 0.15);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: default;
+    }
+    .reason-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 16px 40px rgba(45, 138, 110, 0.18);
+    }
+    .reason-card .icon-row {
+      font-size: 1.35rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.2em;
+    }
+    .reason-card h3 { font-size: 0.95rem; color: var(--verde-medico); margin-bottom: 0.4rem; }
+    .reason-card p { font-size: 0.88rem; color: #546e7a; }
+
+    /* Galería */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+    }
+    @media (min-width: 600px) {
+      .gallery { grid-template-columns: repeat(4, 1fr); }
+    }
+    .g-item {
+      aspect-ratio: 1;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+    .g-item span { font-size: 0.65rem; margin-top: 0.35rem; color: var(--verde-medico); font-weight: 500; text-align: center; padding: 0 4px; }
+    .g-float { animation: floatHeart 3s ease-in-out infinite; }
+    .g-spin { animation: rotateCross 6s linear infinite; }
+    .g-pulse { animation: pulse 2s ease-in-out infinite; }
+    .g-beat .emoji { display: inline-block; animation: heartbeat 1.5s ease-in-out infinite; }
+    .g-shine { animation: sparkle 1.8s ease-in-out infinite; }
+    .g-swing { animation: coatSway 2.8s ease-in-out infinite; }
+    .g-fall { animation: fallingFlowers 5s linear infinite; }
+    .g-grow { animation: pulse 2.5s ease-in-out infinite alternate; }
+    .g-blink { animation: blink 1.2s step-end infinite; }
+    .g-slide { animation: slideIn 2.4s ease-in-out infinite alternate; }
+    .g-bounce { animation: bounceSoft 2s ease-in-out infinite; }
+
+    /* Mensaje central typing + luz */
+    .thank-you-block {
+      margin-top: 2.5rem;
+      padding: 1.75rem;
+      border-radius: 22px;
+      position: relative;
+      overflow: hidden;
+      background: rgba(255,255,255,0.5);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(14px);
+    }
+    .thank-you-block .glow-ring {
+      position: absolute;
+      inset: -2px;
+      border-radius: 22px;
+      background: linear-gradient(120deg, var(--dorado-claro), transparent, var(--azul-suave), transparent, var(--rosa-suave));
+      opacity: 0.45;
+      z-index: 0;
+      animation: rotateCross 12s linear infinite;
+      filter: blur(8px);
+    }
+    .thank-you-inner { position: relative; z-index: 1; }
+    #thankyou-type { font-size: clamp(0.9rem, 2.8vw, 1.05rem); line-height: 1.75; color: #37474f; min-height: 6rem; }
+
+    /* Mayo / contador visual */
+    .mayo-banner {
+      margin-top: 2rem;
+      text-align: center;
+      padding: 1.5rem;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(168, 230, 207, 0.35), rgba(255,255,255,0.7));
+      border: 1px solid rgba(45, 138, 110, 0.2);
+      position: relative;
+    }
+    .mayo-numbers {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      color: var(--dorado);
+      text-shadow: 0 2px 16px rgba(212, 175, 55, 0.4);
+      animation: glowText 3s ease-in-out infinite;
+    }
+    .mayo-text {
+      margin-top: 0.5rem;
+      font-style: italic;
+      color: var(--verde-medico);
+      font-weight: 500;
+      animation: fadeInUp 2s ease infinite alternate;
+    }
+    .mayo-orbit {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+    }
+    .orbit-star {
+      position: absolute;
+      animation: sparkle 1.5s ease-in-out infinite;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      margin-top: 2.5rem;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .btn-magic {
+      padding: 1rem 1.75rem;
+      font-size: 1.05rem;
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      color: #fff;
+      background: linear-gradient(120deg, var(--dorado), #c9a227, var(--rosa-suave));
+      background-size: 200% 200%;
+      animation: shimmerBtn 4s ease infinite;
+      box-shadow: 0 10px 32px rgba(212, 175, 55, 0.4);
+      transition: transform 0.25s ease;
+    }
+    @keyframes shimmerBtn {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .btn-magic:hover { transform: scale(1.04); }
+    .surprise-card {
+      display: none;
+      margin: 1.75rem auto 0;
+      max-width: 28rem;
+      padding: 1.75rem;
+      border-radius: 22px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.92), rgba(255, 236, 245, 0.95));
+      border: 2px solid rgba(212, 175, 55, 0.55);
+      box-shadow: 0 0 40px rgba(212, 175, 55, 0.35), 0 20px 50px rgba(126, 200, 227, 0.25);
+      animation: revealCard 0.8s ease both;
+    }
+    .surprise-card.visible { display: block; }
+    .surprise-card p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #37474f;
+      text-align: center;
+    }
+
+    /* Audio toggle */
+    .audio-bar {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 950;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      max-width: calc(100% - 2rem);
+    }
+    .btn-icon {
+      padding: 0.55rem 0.85rem;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: "Poppins", sans-serif;
+      color: var(--verde-medico);
+      transition: background 0.25s ease;
+    }
+    .btn-icon:hover { background: rgba(255,255,255,0.85); }
+
+    /* Firma */
+    .firma {
+      text-align: center;
+      margin-top: 2rem;
+      font-family: "Great Vibes", cursive;
+      font-size: 1.5rem;
+      color: var(--verde-medico);
+    }
+
+    /* Confeti elemento */
+    .confetti-piece {
+      position: absolute;
+      width: 8px;
+      height: 12px;
+      top: -20px;
+      animation: confettiFall linear forwards;
+      border-radius: 2px;
+    }
+    @keyframes confettiFall {
+      to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0.3;
+      }
+    }
+
+    .symbol-rain {
+      position: fixed;
+      font-size: 1rem;
+      pointer-events: none;
+      z-index: 4;
+      animation: symbolRain linear infinite;
+      opacity: 0.35;
+    }
+    @keyframes symbolRain {
+      0% { transform: translateY(-5vh); }
+      100% { transform: translateY(105vh); }
+    }
+  </style>
+</head>
+<body>
+  <div id="particles" aria-hidden="true"></div>
+  <div class="layer-hearts" id="layer-hearts" aria-hidden="true"></div>
+  <div class="layer-stars" id="layer-stars" aria-hidden="true"></div>
+  <div class="layer-flowers" id="layer-flowers" aria-hidden="true"></div>
+  <div class="layer-doves" id="layer-doves" aria-hidden="true"></div>
+  <div class="layer-confetti" id="layer-confetti" aria-hidden="true"></div>
+
+  <div id="opening-screen">
+    <div class="letter-envelope">
+      <div class="letter-flap" aria-hidden="true"></div>
+      <div class="letter-card">
+        <div class="opening-heart" aria-hidden="true">💌</div>
+        <p class="opening-title">Feliz Día de la Enfermera</p>
+        <p class="opening-date">12 de mayo</p>
+        <button type="button" class="btn-open" id="btn-open-surprise">Abrir esta sorpresa</button>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="hero-badge">✦ Día Internacional de la Enfermera ✦</div>
+      <h1>Para ti, <span class="nombre-destacado" id="hero-nombre">María</span></h1>
+      <p class="hero-sub">Hoy celebramos a una persona que cuida con el corazón, sana con sus manos y acompaña con el alma.</p>
+      <div class="typewriter-box">
+        <p id="typewriter-line" class="cursor-blink"></p>
+      </div>
+
+      <div class="nurse-showcase">
+        <div class="nurse-svg-wrap" aria-hidden="true">
+          <!-- Silueta / icono enfermera SVG -->
+          <svg width="120" height="160" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Enfermera">
+            <defs>
+              <linearGradient id="gscrub" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#e8f8ff"/>
+                <stop offset="100%" stop-color="#a8e6cf"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="60" cy="28" rx="22" ry="24" fill="#ffd4c4"/>
+            <path d="M35 52 Q60 42 85 52 L88 115 Q60 125 32 115 Z" fill="url(#gscrub)" stroke="#2d8a6e" stroke-width="1.2"/>
+            <path d="M48 115 L48 150 L40 150 L40 155 L80 155 L80 150 L72 150 L72 115" fill="#fff" stroke="#b0bec5" stroke-width="1"/>
+            <rect x="52" y="58" width="16" height="8" rx="2" fill="#fff" stroke="#2d8a6e"/>
+            <path d="M30 60 L25 85 M90 60 L95 85" stroke="#2d8a6e" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="60" cy="22" r="16" fill="#fff" stroke="#7ec8e3" stroke-width="2"/>
+            <path d="M52 22 L68 22 M60 14 L60 30" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <p style="font-size:0.9rem;color:#546e7a;max-width:14rem;text-align:center;margin-bottom:0.5rem;">👼 Ángeles de cuidado · 🕊️ Paz en cada gesto</p>
+          <div class="coats-row" aria-hidden="true">
+            <span class="coat-icon">🥼</span><span class="coat-icon">🥼</span><span class="coat-icon">🥼</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>💗 Una carta digital para ti</h2>
+      <p>
+        El <strong>12 de mayo</strong>, Día Internacional de la Enfermera, es una pausa hermosa para recordar lo que das cada día:
+        tu <strong>vocación</strong>, tu <strong>esfuerzo silencioso</strong>, la <strong>paciencia</strong> con la que escuchas y la forma en que
+        eliges el bienestar de los demás con <strong>amor profesional</strong>. Esta página es un pequeño homenaje a quien hace del cuidado un arte noble.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>✨ Por qué eres una enfermera especial</h2>
+      <div class="cards-grid">
+        <article class="reason-card">
+          <div class="icon-row">🩺💉</div>
+          <h3>Paciencia que alivia</h3>
+          <p>Tu paciencia ilumina momentos difíciles.</p>
+        </article>
+        <article class="reason-card">
+          <div class="icon-row">⚕️📋</div>
+          <h3>Vocación visible</h3>
+          <p>Tu vocación inspira respeto.</p>
+        </article>
+        <article class="reason-card">
+          <div class="icon-row">😊🌸</div>
+          <h3>Calma que contagia</h3>
+          <p>Tu sonrisa transmite calma.</p>
+        </article>
+        <article class="reason-card">
+          <div class="icon-row">❤️🤲</div>
+          <h3>Cuidado integral</h3>
+          <p>Tus manos cuidan, pero tu corazón sana.</p>
+        </article>
+        <article class="reason-card">
+          <div class="icon-row">🌟🥼</div>
+          <h3>Entrega diaria</h3>
+          <p>Tu entrega merece ser celebrada todos los días.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>🎨 Galería viva de enfermería</h2>
+      <p style="margin-bottom:0.75rem;font-size:0.92rem;">Cada ícono tiene su propio ritmo: flota, gira, late, brilla… como tú en cada turno.</p>
+      <div class="gallery">
+        <div class="g-item g-float"><span class="emoji">🥼</span><span>Bata</span></div>
+        <div class="g-item g-spin"><span class="emoji">🩺</span><span>Fonendo</span></div>
+        <div class="g-item g-pulse"><span class="emoji">✚</span><span>Cruz</span></div>
+        <div class="g-item g-beat"><span class="emoji">💉</span><span>Jeringa</span></div>
+        <div class="g-item g-shine"><span class="emoji">🌡️</span><span>Termó</span></div>
+        <div class="g-item g-bounce"><span class="emoji">❤️</span><span>Corazón</span></div>
+        <div class="g-item g-swing"><span class="emoji">👼</span><span>Ángel</span></div>
+        <div class="g-item g-slide"><span class="emoji">🕊️</span><span>Paloma</span></div>
+        <div class="g-item g-fall"><span class="emoji">🌷</span><span>Flor</span></div>
+        <div class="g-item g-grow"><span class="emoji">✨</span><span>Brillo</span></div>
+        <div class="g-item g-blink"><span class="emoji">💊</span><span>Salud</span></div>
+        <div class="g-item g-float" style="animation-delay:0.5s"><span class="emoji">📎</span><span>Detalle</span></div>
+      </div>
+    </section>
+
+    <section class="thank-you-block">
+      <div class="glow-ring" aria-hidden="true"></div>
+      <div class="thank-you-inner">
+        <h2 style="position:relative;z-index:1;margin-bottom:0.75rem;font-size:1.25rem;color:var(--verde-medico);">Con gratitud infinita</h2>
+        <p id="thankyou-type"></p>
+      </div>
+    </section>
+
+    <section class="mayo-banner" id="mayo-banner">
+      <div class="mayo-orbit" id="mayo-orbit" aria-hidden="true"></div>
+      <div class="mayo-numbers">12 &nbsp;·&nbsp; mayo</div>
+      <p class="mayo-text" id="mayo-animated">Mayo florece para recordarnos lo valiosa que eres.</p>
+    </section>
+
+    <section class="final-cta">
+      <button type="button" class="btn-magic" id="btn-final-surprise">Haz clic para descubrir tu sorpresa</button>
+      <div class="surprise-card" id="surprise-card" role="region" aria-live="polite">
+        <p id="surprise-message"></p>
+      </div>
+    </section>
+
+    <p class="firma" id="firma-line">Con cariño…</p>
+  </main>
+
+  <div class="audio-bar">
+    <!-- Opcional: coloca musica.mp3 junto a index.html y descomenta la etiqueta audio -->
+    <!-- <audio id="bg-music" loop preload="auto"><source src="musica.mp3" type="audio/mpeg" /></audio> -->
+    <button type="button" class="btn-icon" id="btn-sound" title="Sonidos suaves">🔊 Sonido</button>
+    <button type="button" class="btn-icon" id="btn-music-hint" title="Música opcional">🎵 Música (ver código)</button>
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════════════════════════════
+       CONFIG — Cambia aquí nombre, mensajes y firma
+       ═══════════════════════════════════════════════════════════════════ */
+    const CONFIG = {
+      nombreEnfermera: "María", // <-- NOMBRE DE LA ENFERMERA
+      lineaTypewriterHero:
+        "En cada turno dejas huellas de bondad: escuchas, contienes, alivias y acompañas. El mundo es más amable porque tú eliges cuidar.",
+      mensajeAgradecimiento: // Mensaje central (máquina de escribir)
+        "Gracias por cada turno, por cada noche de esfuerzo, por cada gesto de paciencia y por cada vida que has tocado con tu cuidado. Tu labor no solo cura cuerpos, también da esperanza.",
+      mensajeFinalSorpresa:
+        "Eres más que una enfermera: eres calma, fuerza, esperanza y luz para quienes más lo necesitan. Feliz Día de la Enfermera.",
+      firma: "Con todo mi cariño, Alex", // <-- QUIEN DEDICA LA PÁGINA
+    };
+
+    const $ = (sel) => document.querySelector(sel);
+    const opening = $("#opening-screen");
+    const btnOpen = $("#btn-open-surprise");
+    const heroNombre = $("#hero-nombre");
+    const typeLine = $("#typewriter-line");
+    const thankYou = $("#thankyou-type");
+    const btnFinal = $("#btn-final-surprise");
+    const surpriseCard = $("#surprise-card");
+    const surpriseMsg = $("#surprise-message");
+    const firmaLine = $("#firma-line");
+    const layerHearts = $("#layer-hearts");
+    const layerStars = $("#layer-stars");
+    const layerFlowers = $("#layer-flowers");
+    const layerDoves = $("#layer-doves");
+    const layerConfetti = $("#layer-confetti");
+    const particles = $("#particles");
+    const mayoOrbit = $("#mayo-orbit");
+    const mayoText = $("#mayo-animated");
+
+    heroNombre.textContent = CONFIG.nombreEnfermera;
+    firmaLine.textContent = CONFIG.firma;
+
+    /* Sonido opcional Web Audio (sin archivos externos) */
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function ensureAudio() {
+      if (!audioCtx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (AC) audioCtx = new AC();
+      }
+      return audioCtx;
+    }
+
+    function playChime(freqs, duration = 0.12, gap = 0.05) {
+      if (!soundEnabled) return;
+      const ctx = ensureAudio();
+      if (!ctx) return;
+      if (ctx.state === "suspended") ctx.resume();
+      let t = ctx.currentTime;
+      freqs.forEach((f) => {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.value = f;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.08, t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + duration);
+        osc.connect(g);
+        g.connect(ctx.destination);
+        osc.start(t);
+        osc.stop(t + duration + 0.02);
+        t += duration + gap;
+      });
+    }
+
+    $("#btn-sound").addEventListener("click", () => {
+      soundEnabled = !soundEnabled;
+      $("#btn-sound").textContent = soundEnabled ? "🔊 Sonido" : "🔇 Silencio";
+      if (soundEnabled) playChime([523, 659, 784], 0.1, 0.04);
+    });
+
+    $("#btn-music-hint").addEventListener("click", () => {
+      alert(
+        "Para música suave: guarda un archivo musica.mp3 junto a index.html, descomenta el <audio> en el HTML y usa audio.play() / pause() enlazados a un botón."
+      );
+    });
+
+    /* Partículas de fondo */
+    function spawnParticles() {
+      const colors = ["#7ec8e3", "#f8c8dc", "#d4af37", "#a8e6cf"];
+      for (let i = 0; i < 28; i++) {
+        const d = document.createElement("div");
+        d.className = "particle";
+        const s = 4 + Math.random() * 10;
+        d.style.width = d.style.height = s + "px";
+        d.style.left = Math.random() * 100 + "%";
+        d.style.background = colors[i % colors.length];
+        d.style.animationDuration = 14 + Math.random() * 20 + "s";
+        d.style.animationDelay = Math.random() * 8 + "s";
+        particles.appendChild(d);
+      }
+    }
+
+    function randomItem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function spawnFloatingHearts(count = 12) {
+      const hearts = ["💕", "💗", "❤️", "🤍"];
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement("span");
+        el.className = "floating-heart";
+        el.textContent = randomItem(hearts);
+        el.style.left = Math.random() * 100 + "%";
+        el.style.animationDuration = 10 + Math.random() * 10 + "s";
+        el.style.animationDelay = Math.random() * 8 + "s";
+        el.style.fontSize = 0.8 + Math.random() * 0.8 + "rem";
+        layerHearts.appendChild(el);
+      }
+    }
+
+    function spawnStars(count = 18) {
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement("span");
+        el.className = "star-sparkle";
+        el.textContent = "✦";
+        el.style.left = Math.random() * 100 + "%";
+        el.style.top = Math.random() * 100 + "%";
+        el.style.animationDelay = Math.random() * 2 + "s";
+        el.style.animationDuration = 1.5 + Math.random() * 1.5 + "s";
+        layerStars.appendChild(el);
+      }
+    }
+
+    function spawnFlowers(count = 14) {
+      const fl = ["🌸", "🌷", "🌼", "💮", "🪷"];
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement("span");
+        el.className = "falling-flower";
+        el.textContent = randomItem(fl);
+        el.style.left = Math.random() * 100 + "%";
+        el.style.animationDuration = 8 + Math.random() * 10 + "s";
+        el.style.animationDelay = Math.random() * 6 + "s";
+        layerFlowers.appendChild(el);
+      }
+    }
+
+    function spawnCrosses(count = 10) {
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement("span");
+        el.className = "med-cross-float";
+        el.textContent = "✚";
+        el.style.left = Math.random() * 100 + "%";
+        el.style.top = -Math.random() * 40 + "vh";
+        el.style.animationDuration = 12 + Math.random() * 10 + "s";
+        el.style.animationDelay = Math.random() * 5 + "s";
+        particles.appendChild(el);
+      }
+    }
+
+    function spawnDoves(count = 4) {
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement("span");
+        el.className = "dove";
+        el.textContent = "🕊️";
+        el.style.top = 15 + Math.random() * 55 + "%";
+        el.style.animationDuration = 14 + Math.random() * 12 + "s";
+        el.style.animationDelay = Math.random() * 8 + "s";
+        layerDoves.appendChild(el);
+      }
+    }
+
+    function symbolRainInit() {
+      const syms = ["💉", "🩺", "🌡️", "✚", "💊", "👼"];
+      for (let i = 0; i < 16; i++) {
+        const el = document.createElement("span");
+        el.className = "symbol-rain";
+        el.textContent = randomItem(syms);
+        el.style.left = Math.random() * 100 + "%";
+        el.style.animationDuration = 12 + Math.random() * 16 + "s";
+        el.style.animationDelay = Math.random() * 10 + "s";
+        particles.appendChild(el);
+      }
+    }
+
+    function mayoOrbitStars() {
+      for (let i = 0; i < 10; i++) {
+        const s = document.createElement("span");
+        s.className = "orbit-star";
+        s.textContent = "⭐";
+        s.style.left = 5 + Math.random() * 90 + "%";
+        s.style.top = 5 + Math.random() * 80 + "%";
+        s.style.animationDelay = Math.random() * 2 + "s";
+        mayoOrbit.appendChild(s);
+      }
+    }
+
+    /* Máquina de escribir */
+    function typeWriter(el, text, speed = 32, onDone) {
+      el.textContent = "";
+      let i = 0;
+      function step() {
+        if (i <= text.length) {
+          el.textContent = text.slice(0, i);
+          i++;
+          setTimeout(step, speed);
+        } else if (onDone) onDone();
+      }
+      step();
+    }
+
+    let heroTyped = false;
+    function startHeroTyping() {
+      if (heroTyped) return;
+      heroTyped = true;
+      typeWriter(typeLine, CONFIG.lineaTypewriterHero, 28, () => {
+        typeLine.classList.remove("cursor-blink");
+      });
+    }
+
+    let thankTyped = false;
+    function startThankYouWhenVisible() {
+      if (thankTyped) return;
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting && !thankTyped) {
+              thankTyped = true;
+              typeWriter(thankYou, CONFIG.mensajeAgradecimiento, 22);
+              obs.disconnect();
+            }
+          });
+        },
+        { threshold: 0.35 }
+      );
+      obs.observe(thankYou.parentElement);
+    }
+
+    /* Confeti */
+    function burstConfetti(intensity = 80) {
+      const colors = ["#d4af37", "#7ec8e3", "#f8c8dc", "#2d8a6e", "#f4e4a6", "#fff"];
+      for (let i = 0; i < intensity; i++) {
+        const c = document.createElement("span");
+        c.className = "confetti-piece";
+        c.style.left = Math.random() * 100 + "%";
+        c.style.background = randomItem(colors);
+        c.style.animationDuration = 2.5 + Math.random() * 2.5 + "s";
+        c.style.animationDelay = Math.random() * 0.3 + "s";
+        c.style.transform = `rotate(${Math.random() * 180}deg)`;
+        layerConfetti.appendChild(c);
+        setTimeout(() => c.remove(), 5000);
+      }
+    }
+
+    function extraCelebrationElements() {
+      spawnFloatingHearts(20);
+      spawnStars(25);
+      for (let i = 0; i < 6; i++) {
+        const d = document.createElement("span");
+        d.className = "dove";
+        d.textContent = "🕊️";
+        d.style.top = 10 + Math.random() * 70 + "%";
+        d.style.animationDuration = 10 + Math.random() * 8 + "s";
+        layerDoves.appendChild(d);
+      }
+    }
+
+    btnOpen.addEventListener("click", () => {
+      opening.classList.add("hidden");
+      playChime([392, 494, 587, 784], 0.11, 0.05);
+      startHeroTyping();
+      setTimeout(() => document.getElementById("main-content").scrollIntoView({ behavior: "smooth" }), 400);
+    });
+
+    let finalRevealed = false;
+    btnFinal.addEventListener("click", () => {
+      if (finalRevealed) return;
+      finalRevealed = true;
+      surpriseMsg.textContent = CONFIG.mensajeFinalSorpresa;
+      surpriseCard.classList.add("visible");
+      document.body.classList.add("celebration-bg");
+      burstConfetti(120);
+      extraCelebrationElements();
+      playChime([523, 659, 784, 1047], 0.09, 0.045);
+      btnFinal.textContent = "Sorpresa revelada con amor ✨";
+      btnFinal.disabled = true;
+      btnFinal.style.opacity = "0.85";
+      btnFinal.style.cursor = "default";
+    });
+
+    /* Texto mayo sutil animado */
+    let mayoTick = 0;
+    const mayoBase = "Mayo florece para recordarnos lo valiosa que eres.";
+    setInterval(() => {
+      mayoTick++;
+      if (mayoTick % 4 === 0) mayoText.style.opacity = "0.7";
+      else mayoText.style.opacity = "1";
+    }, 1800);
+
+    spawnParticles();
+    spawnFloatingHearts();
+    spawnStars();
+    spawnFlowers();
+    spawnCrosses();
+    spawnDoves();
+    symbolRainInit();
+    mayoOrbitStars();
+    startThankYouWhenVisible();
+  </script>
+</body>
+</html>
