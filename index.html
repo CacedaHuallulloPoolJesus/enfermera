@@ -9,8 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
     /* ═══════════════════════════════════════════════════════════════════
-       PERSONALIZACIÓN RÁPIDA (edita estos valores o busca CONFIG abajo en JS)
-       - --nombre-enfermera: se muestra en el hero (también editable en JS)
+       Textos largos editables en CONFIG (script al final).
        ═══════════════════════════════════════════════════════════════════ */
     :root {
       --blanco: #fefefe;
@@ -26,7 +25,6 @@
       --glass: rgba(255, 255, 255, 0.42);
       --glass-border: rgba(255, 255, 255, 0.65);
       --sombra: 0 12px 40px rgba(45, 138, 110, 0.12);
-      --nombre-enfermera: "María"; /* Cambia aquí el nombre decorativo si lo prefieres en CSS */
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -619,17 +617,7 @@
     }
     .btn-icon:hover { background: rgba(255,255,255,0.85); }
 
-    /* Firma */
-    .firma {
-      text-align: center;
-      margin-top: 2rem;
-      font-family: "Great Vibes", cursive;
-      font-size: 1.5rem;
-      color: var(--verde-medico);
-    }
-
-    /* Confeti elemento */
-    .confetti-piece {
+    /* Confeti */
       position: absolute;
       width: 8px;
       height: 12px;
@@ -681,8 +669,8 @@
   <main id="main-content">
     <section class="hero">
       <div class="hero-badge">✦ Día Internacional de la Enfermera ✦</div>
-      <h1>Para ti, <span class="nombre-destacado" id="hero-nombre">María</span></h1>
-      <p class="hero-sub">Hoy celebramos a una persona que cuida con el corazón, sana con sus manos y acompaña con el alma.</p>
+      <h1><span class="nombre-destacado">Feliz Día de la Enfermera</span></h1>
+      <p class="hero-sub">Hoy celebramos a quienes cuidan con el corazón, sanan con sus manos y acompañan con el alma.</p>
       <div class="typewriter-box">
         <p id="typewriter-line" class="cursor-blink"></p>
       </div>
@@ -716,48 +704,48 @@
     </section>
 
     <section class="section">
-      <h2>💗 Una carta digital para ti</h2>
+      <h2>💗 Un homenaje al cuidado</h2>
       <p>
-        El <strong>12 de mayo</strong>, Día Internacional de la Enfermera, es una pausa hermosa para recordar lo que das cada día:
-        tu <strong>vocación</strong>, tu <strong>esfuerzo silencioso</strong>, la <strong>paciencia</strong> con la que escuchas y la forma en que
-        eliges el bienestar de los demás con <strong>amor profesional</strong>. Esta página es un pequeño homenaje a quien hace del cuidado un arte noble.
+        El <strong>12 de mayo</strong>, Día Internacional de la Enfermera, es una pausa hermosa para reconocer la <strong>vocación</strong>,
+        el <strong>esfuerzo silencioso</strong>, la <strong>paciencia</strong> con la que se escucha y la forma en que se elige el bienestar de los demás con <strong>amor profesional</strong>.
+        Esta página es un pequeño tributo a quienes hacen del cuidado un arte noble.
       </p>
     </section>
 
     <section class="section">
-      <h2>✨ Por qué eres una enfermera especial</h2>
+      <h2>✨ Por qué la enfermería es extraordinaria</h2>
       <div class="cards-grid">
         <article class="reason-card">
           <div class="icon-row">🩺💉</div>
           <h3>Paciencia que alivia</h3>
-          <p>Tu paciencia ilumina momentos difíciles.</p>
+          <p>La paciencia ilumina momentos difíciles.</p>
         </article>
         <article class="reason-card">
           <div class="icon-row">⚕️📋</div>
           <h3>Vocación visible</h3>
-          <p>Tu vocación inspira respeto.</p>
+          <p>La vocación inspira respeto.</p>
         </article>
         <article class="reason-card">
           <div class="icon-row">😊🌸</div>
           <h3>Calma que contagia</h3>
-          <p>Tu sonrisa transmite calma.</p>
+          <p>Una sonrisa transmite calma.</p>
         </article>
         <article class="reason-card">
           <div class="icon-row">❤️🤲</div>
           <h3>Cuidado integral</h3>
-          <p>Tus manos cuidan, pero tu corazón sana.</p>
+          <p>Manos que cuidan y corazones que sanan.</p>
         </article>
         <article class="reason-card">
           <div class="icon-row">🌟🥼</div>
           <h3>Entrega diaria</h3>
-          <p>Tu entrega merece ser celebrada todos los días.</p>
+          <p>La entrega merece ser celebrada todos los días.</p>
         </article>
       </div>
     </section>
 
     <section class="section">
       <h2>🎨 Galería viva de enfermería</h2>
-      <p style="margin-bottom:0.75rem;font-size:0.92rem;">Cada ícono tiene su propio ritmo: flota, gira, late, brilla… como tú en cada turno.</p>
+      <p style="margin-bottom:0.75rem;font-size:0.92rem;">Cada ícono tiene su propio ritmo: flota, gira, late, brilla… como el pulso del cuidado en cada turno.</p>
       <div class="gallery">
         <div class="g-item g-float"><span class="emoji">🥼</span><span>Bata</span></div>
         <div class="g-item g-spin"><span class="emoji">🩺</span><span>Fonendo</span></div>
@@ -785,17 +773,15 @@
     <section class="mayo-banner" id="mayo-banner">
       <div class="mayo-orbit" id="mayo-orbit" aria-hidden="true"></div>
       <div class="mayo-numbers">12 &nbsp;·&nbsp; mayo</div>
-      <p class="mayo-text" id="mayo-animated">Mayo florece para recordarnos lo valiosa que eres.</p>
+      <p class="mayo-text" id="mayo-animated">Mayo florece como recordatorio de lo valioso que es el cuidado.</p>
     </section>
 
     <section class="final-cta">
-      <button type="button" class="btn-magic" id="btn-final-surprise">Haz clic para descubrir tu sorpresa</button>
+      <button type="button" class="btn-magic" id="btn-final-surprise">Haz clic para descubrir la sorpresa</button>
       <div class="surprise-card" id="surprise-card" role="region" aria-live="polite">
         <p id="surprise-message"></p>
       </div>
     </section>
-
-    <p class="firma" id="firma-line">Con cariño…</p>
   </main>
 
   <div class="audio-bar">
@@ -807,29 +793,25 @@
 
   <script>
     /* ═══════════════════════════════════════════════════════════════════
-       CONFIG — Cambia aquí nombre, mensajes y firma
+       CONFIG — textos del typewriter y mensajes (tono general, sin dedicatoria)
        ═══════════════════════════════════════════════════════════════════ */
     const CONFIG = {
-      nombreEnfermera: "María", // <-- NOMBRE DE LA ENFERMERA
       lineaTypewriterHero:
-        "En cada turno dejas huellas de bondad: escuchas, contienes, alivias y acompañas. El mundo es más amable porque tú eliges cuidar.",
-      mensajeAgradecimiento: // Mensaje central (máquina de escribir)
-        "Gracias por cada turno, por cada noche de esfuerzo, por cada gesto de paciencia y por cada vida que has tocado con tu cuidado. Tu labor no solo cura cuerpos, también da esperanza.",
+        "En cada turno quedan huellas de bondad: escuchar, contener, aliviar y acompañar. El mundo es más amable cuando el cuidado se elige una y otra vez.",
+      mensajeAgradecimiento:
+        "Gracias por cada turno, por cada noche de esfuerzo, por cada gesto de paciencia y por cada vida alcanzada con cuidado genuino. Esa labor no solo cura cuerpos: también devuelve esperanza.",
       mensajeFinalSorpresa:
-        "Eres más que una enfermera: eres calma, fuerza, esperanza y luz para quienes más lo necesitan. Feliz Día de la Enfermera.",
-      firma: "Con todo mi cariño, Alex", // <-- QUIEN DEDICA LA PÁGINA
+        "La enfermería es más que un oficio: es calma, fuerza, esperanza y luz para quienes más lo necesitan. Feliz Día de la Enfermera.",
     };
 
     const $ = (sel) => document.querySelector(sel);
     const opening = $("#opening-screen");
     const btnOpen = $("#btn-open-surprise");
-    const heroNombre = $("#hero-nombre");
     const typeLine = $("#typewriter-line");
     const thankYou = $("#thankyou-type");
     const btnFinal = $("#btn-final-surprise");
     const surpriseCard = $("#surprise-card");
     const surpriseMsg = $("#surprise-message");
-    const firmaLine = $("#firma-line");
     const layerHearts = $("#layer-hearts");
     const layerStars = $("#layer-stars");
     const layerFlowers = $("#layer-flowers");
@@ -838,9 +820,6 @@
     const particles = $("#particles");
     const mayoOrbit = $("#mayo-orbit");
     const mayoText = $("#mayo-animated");
-
-    heroNombre.textContent = CONFIG.nombreEnfermera;
-    firmaLine.textContent = CONFIG.firma;
 
     /* Sonido opcional Web Audio (sin archivos externos) */
     let audioCtx = null;
@@ -1085,7 +1064,7 @@
       burstConfetti(120);
       extraCelebrationElements();
       playChime([523, 659, 784, 1047], 0.09, 0.045);
-      btnFinal.textContent = "Sorpresa revelada con amor ✨";
+      btnFinal.textContent = "Sorpresa revelada ✨";
       btnFinal.disabled = true;
       btnFinal.style.opacity = "0.85";
       btnFinal.style.cursor = "default";
@@ -1093,7 +1072,6 @@
 
     /* Texto mayo sutil animado */
     let mayoTick = 0;
-    const mayoBase = "Mayo florece para recordarnos lo valiosa que eres.";
     setInterval(() => {
       mayoTick++;
       if (mayoTick % 4 === 0) mayoText.style.opacity = "0.7";
